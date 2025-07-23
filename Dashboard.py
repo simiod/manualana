@@ -7,6 +7,9 @@ from afeplc_config import SHEET_NAME, CREDS_PATH
 from afeplc_data_scraper import manual_pull 
 import time
 
+SHEET_NAME = st.secrets["sheet_name"]
+CREDS_PATH = st.secrets["creds_path"]
+
 st.set_page_config(layout="wide")
 
 
