@@ -17,6 +17,13 @@ from oauth2client.service_account import ServiceAccountCredentials
 from gspread.exceptions import APIError
 import logging
 
+SHEET_NAME = st.secrets["sheet_name"]
+CREDS_PATH = st.secrets["creds_path"]
+AFE_INDUCT_PORTALS = dict(st.secrets["afe_portals"])
+AFEINDUCT_SCRAPE_CONFIGS = [dict(config) for config in st.secrets["afe_configs"]]
+USERNAME = st.secrets["username"]
+PASSWORD = st.secrets["password"]
+
 # Configure logging once globally at start of your main script or module
 logging.basicConfig(
     format='%(asctime)s %(message)s',
@@ -62,17 +69,9 @@ EXTRACTORS = {
     "Hour": extract_info_hour,
     "Day": extract_info_day,
 }
-def get_config():
-    SHEET_NAME = st.secrets["sheet_name"]
-    CREDS_PATH = st.secrets["creds_path"]
-    AFE_INDUCT_PORTALS = dict(st.secrets["afe_portals"])
-    AFEINDUCT_SCRAPE_CONFIGS = [dict(config) for config in st.secrets["afe_configs"]]
+for config in AFEINDUCT_SCRAPE_CONFIGS:
+     config["extract_func"] = EXTRACTORS[config["timeframe"]]
 
-    # Add extract_func if needed
-    for config in AFEINDUCT_SCRAPE_CONFIGS:
-        config["extract_func"] = EXTRACTORS[config["timeframe"]]
-
-    return SHEET_NAME, CREDS_PATH, AFE_INDUCT_PORTALS, AFEINDUCT_SCRAPE_CONFIGS
 
 def auth_gspread(CREDS_PATH, SHEET_NAME, worksheet_name):
     global sheet_cache
@@ -109,7 +108,7 @@ def retry_api_call(func, max_retries=5):
 
 
 def manual_pull(induct,timeframe):
-    get_config()
+    #get_config()
     worksheet_name = f"{induct} {timeframe}"
     portal_url = AFE_INDUCT_PORTALS[induct]
     scrape_config = next(
