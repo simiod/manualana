@@ -1,6 +1,5 @@
 #THE GOAL IS TO ACHIEVE A REUSABLE FUNCTION
 # THE ALL IN ONE SCRAPER FRFR
-#pull_data(induct_name="Induct 106", timeframe="Hour")
 import pandas as pd
 import streamlit as st
 from selenium import webdriver
