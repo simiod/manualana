@@ -8,6 +8,10 @@ import time
 
 st.write(st.secrets)
 
+SHEET_NAME = st.secrets["sheet_name"]
+CREDS_PATH = st.secrets["creds_path"]
+
+
 st.set_page_config(layout="wide")
 
 # === Load data from Google Sheets ===
