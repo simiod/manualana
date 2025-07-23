@@ -20,7 +20,7 @@ st.set_page_config(layout="wide")
 def load_data(SHEET_NAME, worksheet_name):
     try:
         scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-        creds = ServiceAccountCredentials.from_json_keyfile_name(CREDS_PATH, scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(GCP_CREDENTIALS, scope)
         client = gspread.authorize(creds)
         sheet = client.open(SHEET_NAME).worksheet(worksheet_name)
         data = sheet.get_all_records()
