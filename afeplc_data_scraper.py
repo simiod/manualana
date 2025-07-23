@@ -21,7 +21,7 @@ import logging
 SHEET_NAME = st.secrets["sheet_name"]
 CREDS_PATH = st.secrets["creds_path"]
 AFE_INDUCT_PORTALS = dict(st.secrets["afe_portals"])
-AFEINDUCT_SCRAPE_CONFIGS = list(st.secrets["afe_configs"])
+AFEINDUCT_SCRAPE_CONFIGS = [dict(config) for config in st.secrets["afe_configs"]]
 USERNAME = st.secrets["username"]
 PASSWORD = st.secrets["password"]
 
