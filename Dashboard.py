@@ -12,12 +12,6 @@ CREDS_PATH = st.secrets["creds_path"]
 
 st.set_page_config(layout="wide")
 
-
-
-# === Auto-refresh every 5 minutes (300 seconds) ===
-#st_autorefresh(interval=300_000, key="auto_refresh")
-# cache for 5 minutes to match auto-refresh DELETE
-
 # === Load data from Google Sheets ===
 @st.cache_data(ttl=300)  
 def load_data(SHEET_NAME, worksheet_name):
@@ -34,17 +28,6 @@ def load_data(SHEET_NAME, worksheet_name):
         return True, df
     except Exception as e:
         return False, f"Error loading {worksheet_name}: {e}"
-
-   
-#last_updated_time = st.cache_data.get_cache_entry(load_data)[1].last_accessed
-#st.info(f"Last updated: {last_updated_time}", icon="⚠️", width="stretch")
-
-# === Sidebar layout ===
-
-#with st.sidebar:
-    #st.header("🔁 Data Refresh Controls")
-
-
 
 # === Sidebar Refresh Buttons ===
 inducts = ["Induct 101","Induct 102","Induct 103","Induct 104","Induct 105", "Induct 106", "Induct 107", "Induct 108"]
@@ -117,6 +100,7 @@ induct_108_min_data = fetch_data_safe("Induct 108 Min")
 induct_108_hour_data = fetch_data_safe("Induct 108 Hour")
 induct_108_day_data = fetch_data_safe("Induct 108 Day")
 
+# Make sure all the tabs span the width of the page and arent squashed
 st.markdown("""
     <style>
     div[data-baseweb="tab-list"] {
