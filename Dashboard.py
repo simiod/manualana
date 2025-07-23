@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from afeplc_config import SHEET_NAME, CREDS_PATH
 from afeplc_data_scraper import manual_pull 
 import time
 
