@@ -53,7 +53,7 @@ for induct in inducts:
                 success, msg = manual_pull(induct, timeframe)
                 if success:
                     st.success(msg)
-                    time.sleep(2.5)
+                    time.sleep(3.5)
                     st.cache_data.clear()
                     st.rerun()
                     
