@@ -10,6 +10,7 @@ st.write(st.secrets)
 
 SHEET_NAME = st.secrets["sheet_name"]
 CREDS_PATH = st.secrets["creds_path"]
+GCP_CREDENTIALS = st.secrets["gcp_service_account"]
 
 
 st.set_page_config(layout="wide")
